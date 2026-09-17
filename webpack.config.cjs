@@ -69,7 +69,7 @@ const
      "webpack");
 const
   _ignore_plugin =
-    _webpack.IgnorePlugin; 
+    _webpack.IgnorePlugin;
 const
   _node_fs_ignore_plugin =
     new _ignore_plugin(
