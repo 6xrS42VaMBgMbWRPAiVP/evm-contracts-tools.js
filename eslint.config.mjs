@@ -35,7 +35,6 @@ const
   _ignores = [
     "build/**",
     "dist/**",
-    "node_modules/**",
     "eslint.config.js",
     "evm-contract-call.js",
     "**/*.evm-contract-call.js",
@@ -73,7 +72,8 @@ const
     "**/*.libevm-contract-deployment-versions.js",
     "libevm-contract-deployments-dir.js",
     "**/*.libevm-contract-deployments-dir.js",
-    "man/**"
+    "man/**",
+    "node_modules/**"
   ];
 
 export default defineConfig([
@@ -123,7 +123,7 @@ export default defineConfig([
        "prefer-const":
          "error" },
    files: [
-    "**/*.{cjs,js}",
+     "**/*.{cjs,js}",
    ],
    languageOptions:
      { sourceType:
