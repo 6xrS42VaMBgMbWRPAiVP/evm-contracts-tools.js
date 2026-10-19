@@ -260,9 +260,16 @@ async function
     "user",
     "defined",
     "n");
-  await _target_app_auto_detect();
-  await _deployments_dir_auto_detect();
-  await _contract_version_auto_detect();
+  const
+    _target_contract =
+      _get(
+        "target",
+        "contract");
+  if ( _target_contract != "" ) {
+    await _target_app_auto_detect();
+    await _deployments_dir_auto_detect();
+    await _contract_version_auto_detect();
+  }
 }
 
 function
