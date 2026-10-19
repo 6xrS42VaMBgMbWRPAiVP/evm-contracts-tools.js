@@ -2106,8 +2106,18 @@ function
     _networks_all;
   _networks_all =
     "n";
-  if ( target_networks.length < 1 &&
-       network_ids.length < 1 ) {
+  const
+    _target_networks =
+      _get(
+        "target",
+        "networks");
+  const
+    _network_ids =
+      _get(
+        "network",
+        "ids");
+  if ( _target_networks.length < 1 &&
+       _network_ids.length < 1 ) {
     _networks_all =
       "y";
   }
