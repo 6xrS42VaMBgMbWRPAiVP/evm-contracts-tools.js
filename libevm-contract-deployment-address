@@ -474,6 +474,11 @@ async function
   if ( _deployments_dir_type === "undefined" ||
        _deployments_dir === "" ) {
     try {
+      _msg =
+        "Deployments directory undefined, " +
+        "auto-detecting.";
+      _msg_info(
+        _msg);
       _deployments_dir =
         await _evm_contract_deployments_dir(
           _target_app,

@@ -604,12 +604,28 @@ async function
   _evm_contract_deployment_address_cmdline(
     _app_opts) {
   let
-    _result;
-  const
+    _result,
+    _results;
+  try {
     _results =
       await _evm_contract_deployment_address.apply(
         null,
         _app_opts);
+  }
+  catch(
+    _error) {
+    _msg =
+      "Error running '_evm_contract_deployment_address' " +
+      "with arguments:";
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _app_opts);
+    _echo2(
+      _error);
+    throw _error;
+  }
   const
     _results_type =
       typeof(
