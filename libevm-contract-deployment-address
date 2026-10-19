@@ -411,7 +411,7 @@ async function
 async function
   _evm_contract_deployment_address(
     _target_networks,
-    _network_ids,
+    _networks_ids,
     _networks_all,
     _target_app,
     _target_contract,
@@ -614,7 +614,7 @@ async function
     `Getting '${_target_contract}' contract address for ` +
     `libEVM app '${_target_app}' ` +
     `for networks with RPCs '${_target_networks}' ` +
-    `and chain ID '${_network_ids}', (user-defined contracts: ` +
+    `and chain ID '${_networks_ids}', (user-defined contracts: ` +
     `'${_user_defined}'), by looking for configuration files ` +
     `of type '${_configuration_format}'.`;
   _msg_info(
@@ -645,7 +645,7 @@ async function
       _configuration_format
     ] );
   }
-  for ( _network of  _network_ids ) {
+  for ( _network of  _networks_ids ) {
     _target_network =
       "";
     _network_check_args = [

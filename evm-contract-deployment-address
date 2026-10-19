@@ -628,6 +628,8 @@ async function
 
 async function
   _main() {
+  let
+    _address;
   const
     _overrides_set_up =
       await _overrides_set();
@@ -644,10 +646,24 @@ async function
       configuration_format,
       deployments_dir,
     ];
-  const
+  try {
     _address =
       await _evm_contract_deployment_address_cmdline(
         app_opts);
+  }
+  catch(
+    _error) {
+    _msg =
+      "Error running " +
+      `'_evm_contract_deployment_adress_cmdline' ` +
+      "with arguments:";
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _error);
+    throw _error;
+  }
 }
 
 _global_variables();
@@ -660,4 +676,17 @@ if ( await _cmdline_check(
 else{
   _url_parse();
 }
-_main();
+try {
+  _main();
+}
+catch(
+  _error) {
+  const
+    _msg =
+      `Error running '${app_name}'.`;
+  _msg_error(
+    _msg,
+    0);
+  _echo2(
+    _error);
+}

@@ -451,9 +451,21 @@ async function
         _msg_info(
           _msg);
       }
-      _app =
-        _app_check(
-          _app);
+      try {
+        _app =
+          _app_check(
+            _app);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_app_check' " +
+          `for application '${_app}'.`;
+        _msg_error(
+          _msg,
+          0);
+        throw _error;
+      }
       const
         _contract_type =
           typeof(
@@ -1989,9 +2001,9 @@ async function
           target_networks[
             0];
       }
-      if ( 0 < network_ids.length ) {
+      if ( 0 < networks_ids.length ) {
         _network_id =
-          _network_ids[
+          _networks_ids[
             0];
       }
       const
@@ -2112,12 +2124,12 @@ function
         "target",
         "networks");
   const
-    _network_ids =
+    _networks_ids =
       _get(
-        "network",
+        "networks",
         "ids");
   if ( _target_networks.length < 1 &&
-       _network_ids.length < 1 ) {
+       _networks_ids.length < 1 ) {
     _networks_all =
       "y";
   }
@@ -2545,7 +2557,8 @@ async function
   let
     _address_missing,
     _app,
-    _evm_contract_deployments_dir;
+    _evm_contract_deployments_dir,
+    _msg;
   const
     _contract_address =
       _get(
