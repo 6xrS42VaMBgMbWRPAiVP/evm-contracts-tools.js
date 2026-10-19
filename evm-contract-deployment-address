@@ -260,11 +260,8 @@ async function
     "user",
     "defined",
     "n");
-  console.log(
-    user_defined);
   await _target_app_auto_detect();
   await _deployments_dir_auto_detect();
-  console.log(deployments_dir);
   await _contract_version_auto_detect();
 }
 

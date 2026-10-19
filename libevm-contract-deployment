@@ -2658,6 +2658,12 @@ async function
   _app =
     "";
   if ( ! _address_missing ) {
+    _msg =
+      "Determining LibEVM application name " +
+      "for contract with address " +
+      `'${_contract_address}'.`;
+    _msg_info(
+      _msg);
     const
       _dir_current_name =
         _basename(
@@ -2733,6 +2739,12 @@ async function
       _msg_info(
         _msg);
     }
+  }
+  else {
+    _msg =
+      "No contract address defined.";
+    _msg_info(
+      _msg);
   }
   _override_set(
     "target",
