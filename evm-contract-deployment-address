@@ -63,6 +63,11 @@ const
   _echo =
     _libcrash._echo;
 /* global
+     _echo2 */
+const
+  _echo2 =
+    _libcrash._echo2;
+/* global
      _exit */
 const
   _exit =
@@ -608,6 +613,7 @@ async function
   _evm_contract_deployment_address_cmdline(
     _app_opts) {
   let
+    _msg,
     _result,
     _results;
   try {
