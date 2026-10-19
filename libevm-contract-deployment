@@ -774,9 +774,21 @@ async function
         _msg_info(
           _msg);
       }
-      _app =
-        _app_check(
-          _app);
+      try {
+        _app =
+          _app_check(
+            _app);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_app_check' " +
+          `for application '${_app}'.`;
+        _msg_error(
+          _msg,
+          0);
+        throw _error;
+      }
       const
         _contract_type =
           typeof(
@@ -1067,9 +1079,21 @@ async function
         _msg_info(
           _msg);
       }
-      _app =
-        _app_check(
-          _app);
+      try {
+        _app =
+          _app_check(
+            _app);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_app_check' " +
+          `for application '${_app}'.`;
+        _msg_error(
+          _msg,
+          0);
+        throw _error;
+      }
       const
         _contract_type =
           typeof(
