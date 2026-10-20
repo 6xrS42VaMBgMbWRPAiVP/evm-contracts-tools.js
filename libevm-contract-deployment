@@ -2042,8 +2042,6 @@ async function
           _deployments_dir);
     if ( _deployments_dir_type !== "undefined" &&
          deployments_dir !== "" ) {
-      _deployments =
-        deployments_dir;
       if ( 0 < target_networks.length ) {
         _network =
           target_networks[
@@ -2057,7 +2055,7 @@ async function
       const
         _deployments_path =
           _path_join( [
-            _deployments,
+            _deployments_dir,
             _contract ] );
       if ( networks_all == "n" ) {
         _networks.push(
