@@ -2008,6 +2008,7 @@ async function
     _network,
     _network_id,
     _networks,
+    _path_join_args,
     _version,
     _msg;
   _networks =
@@ -2020,6 +2021,21 @@ async function
     _get(
       "deployments",
       "dir");
+  const
+    _target_networks =
+      _get(
+        "target",
+        "networks");
+  const
+    _networks_ids =
+      _get(
+        "networks",
+        "ids");
+  const
+    _networks_all =
+      _get(
+        "networks",
+        "all");
   _found =
     false;
   if ( configuration_format == "bash" ) {
@@ -2042,12 +2058,12 @@ async function
           _deployments_dir);
     if ( _deployments_dir_type !== "undefined" &&
          deployments_dir !== "" ) {
-      if ( 0 < target_networks.length ) {
+      if ( 0 < _target_networks.length ) {
         _network =
-          target_networks[
+          _target_networks[
             0];
       }
-      if ( 0 < networks_ids.length ) {
+      if ( 0 < _networks_ids.length ) {
         _network_id =
           _networks_ids[
             0];
@@ -2057,12 +2073,25 @@ async function
           _path_join( [
             _deployments_dir,
             _contract ] );
-      if ( networks_all == "n" ) {
-        _networks.push(
-          _network,
-          _network_id);
+      if ( _networks_all == "n" ) {
+        const
+          _network_type =
+            typeof(
+              _network);
+        if ( _network_type !== "undefined" ) {
+          _networks.push(
+            _network);
+        }
+        const
+          _network_id_type =
+            typeof(
+              _network_id);
+        if ( _network_id_type !== "undefined" ) {
+          _networks.push(
+            _network_id);
+        }
       }
-      else if ( networks_all == "y" ) {
+      else if ( _networks_all == "y" ) {
         const
           _evm_contract_deployment_networks_args = [
             _deployments_path,
@@ -2070,21 +2099,42 @@ async function
             "n",                  // Display safest
             "n"                   // Display cheapest
           ];
-        _networks_new =
-          await _evm_contract_deployment_networks.apply(
-            null,
-            _evm_contract_deployment_networks_args);
+        const
+          _networks_new =
+            await _evm_contract_deployment_networks.apply(
+              null,
+              _evm_contract_deployment_networks_args);
         _networks =
           _networks.concat(
             _networks_new);
       }
+      _msg =
+        `Input networks '${_networks}'.`;
+      _msg_info(
+        _msg);
       for ( _net of _networks ) {
-        _config =
-          _path_join( [
+        _path_join_args = [
             _deployments_path,
             _net,
             `config.${_config_ext}`
-            ]);
+	  ];
+        try {
+          _config =
+            _path_join(
+              _path_join_args);
+	}
+        catch(
+          _error) {
+          _msg =
+            "Error running '_path_join' " +
+            "with arguments:";
+          _msg_error(
+            _msg,
+            0);
+          _echo2(
+            _path_join_args);
+          throw _error;
+	}
         if ( _file_exists(
                _config) ) {
           _found =
@@ -2096,6 +2146,13 @@ async function
             _msg);
           break;
         }
+        else {
+          _msg =
+            "Deployment at location " +
+            `'${_config}' not found.`;
+          _msg_info(
+            _msg);
+	}
       }
       if ( ! _found ) {
         _msg =

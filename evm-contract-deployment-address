@@ -657,9 +657,20 @@ async function
   let
     _address,
     _msg;
-  const
-    _overrides_set_up =
-      await _overrides_set();
+  try {
+    const
+      _overrides_set_up =
+        await _overrides_set();
+  }
+  catch(
+    _error) {
+    _msg =
+      "Error setting overrides.";
+    _msg_error(
+      _msg,
+      0);
+    throw _error;
+  }
   _config_show();
   const
     app_opts = [
