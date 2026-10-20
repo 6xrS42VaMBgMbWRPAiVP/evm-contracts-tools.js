@@ -2002,7 +2002,7 @@ async function
     _config_ext,
     _contract,
     _deployments_dir,
-    _evm_contracts_deployment_versions,
+    _evm_contract_deployment_versions,
     _found,
     _net,
     _network,

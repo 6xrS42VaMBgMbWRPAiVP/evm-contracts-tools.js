@@ -180,7 +180,7 @@ function
     "networks",
     []);
   /* global
-       network_ids:
+       networks_ids:
          writable */
   _set(
     "networks",
@@ -292,7 +292,7 @@ function
       `             Resolve date:   ${resolve_date}`,
       `      Runtime environment:   ${runtime_environment}`,
       `          Target networks:   ${target_networks}`,
-      `    Network ID (chain ID):   ${network_ids}`,
+      `    Network ID (chain ID):   ${networks_ids}`,
       `             All networks:   ${networks_all}`,
       `       Target application:   ${target_app}`,
       `     User-defined address:   ${user_defined}`,
@@ -460,24 +460,24 @@ async function
     "networks",
     _target_networks);
   const
-    _network_ids =
+    _networks_ids =
       _get(
-        "network",
+        "networks",
         "ids");
   if ( "i" in _argv ) {
-    _network_ids.push(
+    _networks_ids.push(
       _argv[
         "i"].toString());
   }
   if ( "network-id" in _argv ) {
-    _network_ids.push(
+    _networks_ids.push(
       _argv[
         "network-id"].toString());
   }
   _set(
     "network",
     "ids",
-    _network_ids);
+    _networks_ids);
   if ( "a" in _argv ) {
     _set(
       "target",
@@ -664,7 +664,7 @@ async function
   const
     app_opts = [
       target_networks,
-      network_ids,
+      networks_ids,
       networks_all,
       target_app,
       target_contract,
