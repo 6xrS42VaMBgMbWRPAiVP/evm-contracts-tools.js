@@ -2002,6 +2002,7 @@ async function
     _config_ext,
     _contract,
     _deployments_dir,
+    _evm_contract_deployment_networks,
     _evm_contract_deployment_versions,
     _found,
     _net,
@@ -2092,6 +2093,27 @@ async function
         }
       }
       else if ( _networks_all == "y" ) {
+        _evm_contract_deployment_networks =
+          _get(
+            "_evm_contract",
+            "deployment_networks");
+        try {
+          _evm_contract_deployment_networks =
+            await _evm_contract_deployment_networks_check(
+              _evm_contract_deployment_networks);
+	}
+        catch(
+          _error) {
+          _msg =
+            "Error running " +
+            "'_evm_contract_deployment_networks_check'.";
+          _msg_error(
+            _msg,
+            0);
+          _echo2(
+            _error);
+          throw _error;
+	}
         const
           _evm_contract_deployment_networks_args = [
             _deployments_path,
