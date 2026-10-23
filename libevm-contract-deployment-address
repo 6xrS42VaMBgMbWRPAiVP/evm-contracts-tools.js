@@ -482,12 +482,11 @@ async function
     _address,
     _args,
     _contract_address,
-    _contract_addresses,
+    _contracts_addresses,
     _msg,
     _network,
     _network_check_args,
     _output,
-    _output_type,
     _target_network,
     _target_network_id,
     _user_deployments_dir,
@@ -513,11 +512,11 @@ async function
     _evm_contract_deployments_dir =
       _libevm_contract_deployments_dir_module._evm_contract_deployments_dir;
   if ( _output_type == "set" ) {
-    _contract_addresses =
+    _contracts_addresses =
       [];
   }
   else if ( _output_type == "object" ) {
-    _contract_addresses =
+    _contracts_addresses =
       {};
   }
   const
@@ -792,7 +791,7 @@ async function
   }
   else if ( _output_type === "object" ) {
     _output =
-      _contract_addresses;
+      _contracts_addresses;
   }
   return _output;
 }
