@@ -203,6 +203,11 @@ const
   _target_app_auto_detect =
     _libevm_contract_deployment_module._target_app_auto_detect;
 /* global
+     _user_defined_check */
+const
+  _user_defined_check =
+    _libevm_contract_deployment_module._user_defined_check;
+/* global
      _user_deployments_check */
 const
   _user_deployments_check =
@@ -405,7 +410,10 @@ async function
     _msg_info(
       _msg);
   }
-  return _contract_address;
+  return [
+    _contract_address,
+    _net
+  ];
 }
 
 function
@@ -418,7 +426,7 @@ function
     false;
   const
     _default =
-      "list";
+      "set";
   const
     _output_type_type =
       typeof(
@@ -445,6 +453,16 @@ function
     _output_type =
       _default;
   }
+  if ( _output_type !== "set" &&
+       _output_type !== "object" ) {
+    _msg =
+      "Unknown type " +
+      `'${_output_type}'.`;
+    _msg_error(
+      _msg,
+      0);
+    throw _msg;
+  }
   return _output_type;
 }
 
@@ -464,9 +482,11 @@ async function
     _address,
     _args,
     _contract_address,
+    _contract_addresses,
     _msg,
     _network,
     _network_check_args,
+    _output,
     _output_type,
     _target_network,
     _target_network_id,
@@ -492,30 +512,24 @@ async function
   const
     _evm_contract_deployments_dir =
       _libevm_contract_deployments_dir_module._evm_contract_deployments_dir;
-  const
-    _contracts_addresses =
+  if ( _output_type == "set" ) {
+    _contract_addresses =
       [];
+  }
+  else if ( _output_type == "object" ) {
+    _contract_addresses =
+      {};
+  }
   const
     _contract_address_get_args =
       [];
-  const
-    _user_defined_type =
-      typeof(
-        _user_defined);
+  _user_defined =
+    _user_defined_check(
+      _user_defined);
   const
     _deployments_dir_type =
       typeof(
         _deployments_dir);
-  if ( _user_defined_type === "undefined" ||
-       _user_defined === "" ) {
-    _msg =
-      "User defined not specified, setting " +
-      "default (n).";
-    _msg_info(
-      _msg);
-    _user_defined =
-      "n";
-  }
   if ( _deployments_dir_type === "undefined" ||
        _deployments_dir === "" ) {
     try {
@@ -732,7 +746,8 @@ async function
         _echo2(
           _args);
       }
-      _contract_address =
+      [ _contract_address,
+        _network ] =
         await _contract_address_get.apply(
           null,
           _args);
@@ -752,8 +767,15 @@ async function
         _error);
       throw _msg;
     }
-    _contracts_addresses.push(
-      _contract_address);
+    if ( _output_type === "set" ) {
+      _contracts_addresses.push(
+        _contract_address);
+    }
+    else if ( _output_type === "object" ) {
+      _contracts_addresses[
+        _network] =
+        _contract_address;
+    }
   }
   const
     _contracts_addresses_set =
@@ -763,8 +785,16 @@ async function
       _address] =
       1;
   }
-  return Object.keys(
-    _contracts_addresses_set);
+  if ( _output_type === "set" ) {
+    _output =
+      Object.keys(
+        _contracts_addresses_set);
+  }
+  else if ( _output_type === "object" ) {
+    _output =
+      _contract_addresses;
+  }
+  return _output;
 }
 
 export {

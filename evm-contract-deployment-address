@@ -235,6 +235,13 @@ function
     "deployments",
     "dir",
     "");
+  /* global
+       output_type:
+         writable */
+  _set(
+    "output",
+    "type",
+    "");
   const
     _global =
       _global_get();
@@ -260,6 +267,10 @@ async function
     "configuration",
     "format",
     "bash");
+  _override_set(
+    "output",
+    "type",
+    "set");
   _networks_all_auto_detect();
   _override_set(
     "user",
@@ -296,6 +307,7 @@ function
       `             All networks:   ${networks_all}`,
       `       Target application:   ${target_app}`,
       `     User-defined address:   ${user_defined}`,
+      `              Output type:   ${output_type}`,
       `         Deployments path:   ${deployments_dir}`,
     ];
   for ( _line of _text ) {
@@ -347,6 +359,9 @@ function
       "     -f, --configuration-format <format>  Specify contract deployments",
       "                                          directory path.",
       `                                          Default: '${configuration_format}'`,
+      "     -o, --output-type <type>             Output type. It can be ",
+      "                                          'set' or 'object'.",
+      `                                          Default: '${output_type}'`,
       "",
       "     -h --help                            This message.",
       "     -v --verbose                         Enable verbose output.",
@@ -683,6 +698,7 @@ async function
       user_defined,
       configuration_format,
       deployments_dir,
+      output_type
     ];
   try {
     _address =
