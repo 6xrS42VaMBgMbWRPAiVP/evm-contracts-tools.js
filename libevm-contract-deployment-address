@@ -408,6 +408,46 @@ async function
   return _contract_address;
 }
 
+function
+  _output_type_check(
+    _output_type) {
+  let
+    _msg,
+    _output_type_get;
+  _output_type_get =
+    false;
+  const
+    _default =
+      "list";
+  const
+    _output_type_type =
+      typeof(
+        _output_type);
+  if ( _output_type === "undefined" ) {
+    _msg =
+      "Output type is undefined, " +
+      "setting default.";
+    _msg_info(
+      _msg);
+    _output_type_get =
+      true;
+  }
+  if ( _output_type === "undefined" ) {
+    _msg =
+      "Output type variable is an empty " +
+      "string, setting default.";
+    _msg_info(
+      _msg);
+    _output_type_get =
+      true;
+  }
+  if ( _output_type_get ) {
+    _output_type =
+      _default;
+  }
+  return _output_type;
+}
+
 async function
   _evm_contract_deployment_address(
     _target_networks,
@@ -418,7 +458,8 @@ async function
     _contract_version,
     _user_defined,
     _configuration_format,
-    _deployments_dir) {
+    _deployments_dir,
+    _output_type) {
   let
     _address,
     _args,
@@ -426,6 +467,7 @@ async function
     _msg,
     _network,
     _network_check_args,
+    _output_type,
     _target_network,
     _target_network_id,
     _user_deployments_dir,
@@ -433,6 +475,9 @@ async function
   _configuration_format =
     _configuration_format_check(
       _configuration_format);
+  _output_type =
+    _output_type_check(
+      _output_type);
   const
     _global =
       _global_get();
