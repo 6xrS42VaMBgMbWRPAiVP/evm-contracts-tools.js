@@ -1980,7 +1980,7 @@ function
         _msg =
           "Global variable 'target_app' has " +
           "the wrong type for the local " +
-          `variable '_app' ('${_target_app_variable}')`;
+          `variable '_app' ('${_target_app_type}')`;
         _msg_error(
           _msg,
           0);
