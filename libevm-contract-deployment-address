@@ -780,12 +780,12 @@ async function
   const
     _contracts_addresses_set =
       {};
-  for ( _address of _contracts_addresses ) {
-    _contracts_addresses_set[
-      _address] =
-      1;
-  }
   if ( _output_type === "set" ) {
+    for ( _address of _contracts_addresses ) {
+      _contracts_addresses_set[
+        _address] =
+        1;
+    }
     _output =
       Object.keys(
         _contracts_addresses_set);
