@@ -431,7 +431,7 @@ function
     _output_type_type =
       typeof(
         _output_type);
-  if ( _output_type === "undefined" ) {
+  if ( _output_type_type === "undefined" ) {
     _msg =
       "Output type is undefined, " +
       "setting default.";
@@ -440,7 +440,7 @@ function
     _output_type_get =
       true;
   }
-  if ( _output_type === "undefined" ) {
+  if ( _output_type_type === "undefined" ) {
     _msg =
       "Output type variable is an empty " +
       "string, setting default.";
@@ -457,7 +457,8 @@ function
        _output_type !== "object" ) {
     _msg =
       "Unknown type " +
-      `'${_output_type}'.`;
+      `'${_output_type}' for variable ` +
+      `output type.`;
     _msg_error(
       _msg,
       0);
